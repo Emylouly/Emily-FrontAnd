@@ -31,7 +31,7 @@ public class LivroController {
     // Buscar livro por ID
     @GetMapping("/livro/buscarporid")
     public ModelAndView getById(@RequestParam("id") Long id) {
-        ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView("livro/form");
         LivroDTO livro = livroService.getById(id);
 
         if (livro != null) {

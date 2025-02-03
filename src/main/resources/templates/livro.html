@@ -41,7 +41,8 @@
                 <td th:text="${livro.num_paginas}"></td>
                 <td th:text="${livro.preco}"></td>
                 <td>
-                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm">
+                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Tem certeza que deseja deletar?');" >
                         <div class="pesquisa-container"><button>Deletar</button></div>
                     </a>
                 </td>
