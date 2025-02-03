@@ -41,10 +41,15 @@
                 <td th:text="${livro.num_paginas}"></td>
                 <td th:text="${livro.preco}"></td>
                 <td>
-                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"
-                        onclick="return confirm('Tem certeza que deseja deletar?');" >
-                        <div class="pesquisa-container"><button>Deletar</button></div>
-                    </a>
+                        
+                        <a th:href="@{livro/buscarporid/{id}(id=${livro.id_livro})}">
+                            <div class="pesquisa-container"><button>Visualizar</button></div>
+                        </a>
+
+                        <a th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Tem certeza que deseja deletar?');" >
+                            <div class="pesquisa-container"><button>Deletar</button></div>
+                        </a>
                 </td>
             </tr>
         </tbody>
