@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="/css/stylesLivro.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Lista de Livros</h1>
+    </div>
+
+    <!-- Mensagem de erro -->
+    <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div th:if="${deletelivro}" class="alert alert-success" role="alert">
+        <p th:text="${deletelivro}"></p>
+    </div>
+
+    <!-- Tabela de livros -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Ano de publicação</th>
+                <th>Gênero</th>
+                <th>ISBN</th>
+                <th>Número de Páginas</th>
+                <th>Sinopse</th>
+                <th>Idioma</th>
+                <th>Data do cadastro</th>
+                <th>Preço</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="livro : ${listaLivro}">
+                <td th:text="${livro.id_livro}"></td>
+                <td th:text="${livro.titulo}"></td>
+                <td th:text="${livro.autor}"></td>
+                <td th:text="${livro.editora}"></td>
+                <td th:text="${livro.ano_publicacao}"></td>
+                <td th:text="${livro.genero}"></td>
+                <td th:text="${livro.isbn}"></td>
+                <td th:text="${livro.num_paginas}"></td>
+                <td th:text="${livro.sinopse}"></td>
+                <td th:text="${livro.idioma}"></td>
+                <td th:text="${livro.data_cadastro}"></td>
+                <td th:text="${livro.preco}"></td>
+                <td>
+                    <a th:href="@{/livros/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm">
+                        <div class="pesquisa-container"><button>Deletar</button></div>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pesquisa-container">
+        <form th:action="@{/livro/listall}" method="get">
+            <button type="submit">Listar todos os livros</button>
+        </form>
+
+        <form th:action="@{/livro/buscarporid}" method="get">
+            <input type="number" name="id" placeholder="ID" required>
+            <button type="submit">Pesquisar pelo ID</button>
+        </form>
+    
+        <form th:action="@{/livro/buscarporisbn}" method="get">
+            <input type="text" name="isbn" placeholder="ISBN" required>
+            <button type="submit">Pesquisar pelo ISBN</button>
+        </form>
+    
+        <form th:action="@{/livro/buscarportitulo}" method="get">
+            <input type="text" name="titulo" placeholder="TITULO" required>
+            <button type="submit">Pesquisar pelo Título</button>
+        </form>
+    </div>
+</body>
+</html>
