@@ -41,18 +41,29 @@
                 <td th:text="${livro.num_paginas}"></td>
                 <td th:text="${livro.preco}"></td>
                 <td>
-                        
-                        <a th:href="@{livro/buscarporid/{id}(id=${livro.id_livro})}">
-                            <div class="pesquisa-container"><button>Visualizar</button></div>
-                        </a>
+                    <input type="hidden" name="id" th:value="${livro.id_livro}"/>
+                    <a th:href="@{/livro/view/{id}(id=${livro.id_livro})}">
+                        <button>Visualizar</button>
+                    </a>
 
-                        <a th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Tem certeza que deseja deletar?');" >
-                            <div class="pesquisa-container"><button>Deletar</button></div>
-                        </a>
+                    <a th:href="@{/livro/edit/{id}(id=${livro.id_livro})}">
+                        <button>Editar</button>
+                    </a>
+
+                    <a th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}"
+                       onclick="return confirm('Tem certeza que deseja deletar?');">
+                        <button>Deletar</button>
+                    </a>
+
+                    <input type="hidden" name="_method" id="_method" value="" />
+
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+
 </body>
 </html>

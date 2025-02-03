@@ -5,33 +5,51 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import br.edu.ifba.demo.frontend.dto.LivroDTO;
+import reactor.core.publisher.Mono;
 
 @Service
 public class LivroService {
 
     private final String BASE_URL = "http://localhost:8081/livro";
-    private final RestTemplate Temp = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final WebClient webClient;
+
+    public LivroService() {
+        this.webClient = WebClient.builder().baseUrl(BASE_URL).build();
+    }
 
     public List<LivroDTO> listAll() {
-        LivroDTO[] livros = Temp.getForObject(BASE_URL + "/listall", LivroDTO[].class);
+        LivroDTO[] livros = restTemplate.getForObject(BASE_URL + "/listall", LivroDTO[].class);
         return Arrays.asList(livros);
     }
 
-    public LivroDTO getById(Long id) {
-        return Temp.getForObject(BASE_URL + "/buscarporid/{id}", LivroDTO.class, id);
+    public LivroDTO getById(Long idLivro) {
+        Mono<LivroDTO> monoObj = this.webClient
+                .get()
+                .uri("/buscarporid/{id}", idLivro) // Corrigido a URI
+                .retrieve()
+                .bodyToMono(LivroDTO.class);
+
+        return monoObj.block(); // Bloqueia para obter o resultado síncrono
     }
 
-    public LivroDTO getByIsbn(String isbn) {
-        return Temp.getForObject(BASE_URL + "/buscarporisbn/{isbn}", LivroDTO.class, isbn);
+    public void delete(Long id) {
+        restTemplate.delete(BASE_URL + "/deletelivro/{id}", id);
     }
 
-    public LivroDTO getByTitulo(String titulo) {
-        return Temp.getForObject(BASE_URL + "/buscarportitulo/{titulo}", LivroDTO.class, titulo);
+    public boolean salvarOuAtualizar(LivroDTO livroDTO){
+        Mono<LivroDTO> obj = this.webClient
+            .post()  // Use apenas .post() e não HttpMethod.POST
+            .uri("/salvar")  // Certifique-se que "/salvar" existe no backend
+            .bodyValue(livroDTO)
+            .retrieve()
+            .bodyToMono(LivroDTO.class);
+        
+        LivroDTO livro = obj.block();
+        return livro != null;
     }
     
-    public void delete(Long id) {
-        Temp.delete(BASE_URL + "/deletelivro/{id}", id);
-    }
 }
