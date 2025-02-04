@@ -14,7 +14,7 @@
     <div class="container mt-4">
         <h1 th:text="${view} ? 'Visualizar Livro' : (${livro.id_livro} != null ? 'Editar Livro' : 'Novo Livro')"></h1>
     
-        <form th:action="@{${livro.id_livro} != null ? '/livro/editar' : '/livro/salvar'}"
+        <form th:action="@{${livro.id_livro} != null ? '/livro/editar' : '/livro/add'}"
               th:object="${livro}" method="post" class="row g-3">
             
             <!-- Se já houver um ID, inclui um hidden para manter a informação -->
@@ -34,7 +34,7 @@
 
             <div class="col-md-4">
                 <label for="ano_publicacao" class="form-label">Ano Publicação:</label>
-                <input type="datetime" class="form-control" th:disabled="${view}"
+                <input type="number" class="form-control" th:disabled="${view}"
                        id="ano_publicacao" th:field="*{ano_publicacao}" />
             </div>
 
@@ -70,7 +70,7 @@
 
             <div class="col-md-6">
                 <label for="data_cadastro" class="form-label">Data Cadastro:</label>
-                <input type="datetime" class="form-control" th:disabled="${view}"
+                <input type="datetime-local" class="form-control" th:disabled="${view}"
                        id="data_cadastro" th:field="*{data_cadastro}" />
             </div>
 
@@ -88,7 +88,11 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-success" th:disabled="${view}" th:href="@{/livro/salvar(id=${livro.id_livro})}">Salvar</button>
+                <form action="http://localhost:8081/livro/add" method="post">
+                    <!-- Campos do formulário -->
+                    <button type="submit">Adicionar Livro</button>
+                </form>
+                
                 <a th:href="@{/livro/listall}" class="btn btn-secondary">Voltar</a>
             </div>
         </form>

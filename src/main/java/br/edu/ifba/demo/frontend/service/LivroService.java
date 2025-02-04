@@ -40,5 +40,15 @@ public class LivroService {
         restTemplate.delete(BASE_URL + "/deletelivro/{id}", id);
     }
 
+    public void addLivro(LivroDTO livroDTO) {
+        this.webClient.post()
+        .uri("http://localhost:8081/livro/add")  // Adicionar o domínio completo
+        .bodyValue(livroDTO)
+        .retrieve()
+        .bodyToMono(Void.class)
+        .block();
+
+    }
+    
     
 }
