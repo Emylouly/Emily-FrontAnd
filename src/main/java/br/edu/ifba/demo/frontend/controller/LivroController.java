@@ -46,23 +46,18 @@ public class LivroController {
         return "redirect:/livro/listall";
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView  editarLivro(@PathVariable("id") Long id) {
-        LivroDTO livro = livroService.getById(id);
-        ModelAndView mv = new ModelAndView("livro/form");
-        mv.addObject("livro", livro);
-        mv.addObject("view", false);
-        return mv;
+    @GetMapping("/novo")
+    public ModelAndView novoLivro() {
+        ModelAndView model = new ModelAndView("livro/form");
+        model.addObject("livro", new LivroDTO());
+        return model;
     }
 
-    @PostMapping("/salvar")
-    public String salvarLivro(@ModelAttribute LivroDTO livroDTO, RedirectAttributes redirectAttributes) {
-        boolean sucesso = livroService.salvarOuAtualizar(livroDTO);
-        if (sucesso) {
-            redirectAttributes.addFlashAttribute("mensagem", "Livro salvo com sucesso!");
-        } else {
-            redirectAttributes.addFlashAttribute("erro", "Erro ao salvar o livro.");
-        }
-        return "redirect:/livro/listall";
+    // Mapeia a URL para salvar o livro após o envio do formulário
+    @PostMapping("/novo")
+    public String adicionarLivro(@ModelAttribute LivroDTO livro) {
+        livroService.addLivro(livro); // Chama o serviço para salvar o livro
+        return "redirect:/livro/listall"; // Redireciona para a página de lista de livros
     }
+
 }

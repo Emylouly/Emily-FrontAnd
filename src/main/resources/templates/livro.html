@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Livros</title>
     <link rel="stylesheet" href="/css/stylesLivro.css">
+  
 </head>
 <body>
     <div class="header">
@@ -21,8 +22,12 @@
         <p th:text="${deletelivro}"></p>
     </div>
 
+    <div class="container">
+        <a th:href="@{/livro/novo}" class="btn btn-primary mb-3">
+            Cadastrar Novo
+        </a>
     <!-- Tabela de livros -->
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Título</th>
@@ -41,29 +46,32 @@
                 <td th:text="${livro.num_paginas}"></td>
                 <td th:text="${livro.preco}"></td>
                 <td>
+
                     <input type="hidden" name="id" th:value="${livro.id_livro}"/>
-                    <a th:href="@{/livro/view/{id}(id=${livro.id_livro})}">
+                    <a class="btn btn-primary btn-sm" 
+                        th:href="@{/livro/view/{id}(id=${livro.id_livro})}">
                         <button>Visualizar</button>
                     </a>
 
-                    <a th:href="@{/livro/edit/{id}(id=${livro.id_livro})}">
+                    <a class="btn btn-primary btn-sm"
+                        th:href="@{/livro/edit/{id}(id=${livro.id_livro})}">
                         <button>Editar</button>
                     </a>
 
-                    <a th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}"
+                    <a class="btn btn-primary btn-sm"
+                        th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}"
                        onclick="return confirm('Tem certeza que deseja deletar?');">
                         <button>Deletar</button>
                     </a>
 
-                    <input type="hidden" name="_method" id="_method" value="" />
-
+                        <input type="hidden" name="_method" id="_method" value="" />
                 </td>
             </tr>
         </tbody>
     </table>
+    </div>
 
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
 
 </body>
 </html>

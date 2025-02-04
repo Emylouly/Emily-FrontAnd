@@ -3,6 +3,9 @@ package br.edu.ifba.demo.frontend.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -40,16 +43,13 @@ public class LivroService {
         restTemplate.delete(BASE_URL + "/deletelivro/{id}", id);
     }
 
-    public boolean salvarOuAtualizar(LivroDTO livroDTO){
-        Mono<LivroDTO> obj = this.webClient
-            .post()  // Use apenas .post() e não HttpMethod.POST
-            .uri("/salvar")  // Certifique-se que "/salvar" existe no backend
-            .bodyValue(livroDTO)
-            .retrieve()
-            .bodyToMono(LivroDTO.class);
-        
-        LivroDTO livro = obj.block();
-        return livro != null;
+    public LivroDTO addLivro(LivroDTO livro) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<LivroDTO> request = new HttpEntity<>(livro, headers);
+
+        return restTemplate.postForObject(BASE_URL + "/novo", request, LivroDTO.class);
     }
     
+     
 }
