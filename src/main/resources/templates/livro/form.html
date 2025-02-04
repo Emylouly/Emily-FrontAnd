@@ -14,8 +14,8 @@
     <div class="container mt-4">
         <h1 th:text="${view} ? 'Visualizar Livro' : (${livro.id_livro} != null ? 'Editar Livro' : 'Novo Livro')"></h1>
     
-        <form th:action="@{${livro.id_livro} != null ? '/livro/editar' : '/livro/novo'}"
-         th:object="${livro}" method="post" class="row g-3">
+        <form th:action="@{${livro.id_livro} != null ? '/livro/editar' : '/livro/salvar'}"
+              th:object="${livro}" method="post" class="row g-3">
             
             <!-- Se já houver um ID, inclui um hidden para manter a informação -->
             <input type="hidden" th:field="*{id_livro}" />
@@ -34,10 +34,10 @@
 
             <div class="col-md-4">
                 <label for="ano_publicacao" class="form-label">Ano Publicação:</label>
-                <input type="number" class="form-control" th:disabled="${view}"
-                       id="ano_publicacao" th:field="*{ano_publicacao}" min="1900" max="2025" />
-            </div>                        
-            
+                <input type="datetime" class="form-control" th:disabled="${view}"
+                       id="ano_publicacao" th:field="*{ano_publicacao}" />
+            </div>
+
             <div class="col-md-4">
                 <label for="editora" class="form-label">Editora:</label>
                 <input type="text" class="form-control" th:disabled="${view}"
@@ -52,7 +52,7 @@
 
             <div class="col-md-4">
                 <label for="isbn" class="form-label">ISBN:</label>
-                <input type="number" class="form-control" th:disabled="${view}"
+                <input type="text" class="form-control" th:disabled="${view}"
                        id="isbn" th:field="*{isbn}" />
             </div>
 
@@ -88,7 +88,7 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="submit" class="btn btn-success" th:disabled="${view}" th:href="@{/livro/salvar(id=${livro.id_livro})}">Salvar</button>
                 <a th:href="@{/livro/listall}" class="btn btn-secondary">Voltar</a>
             </div>
         </form>

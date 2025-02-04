@@ -1,5 +1,6 @@
 package br.edu.ifba.demo.frontend.dto;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import lombok.Data;
@@ -11,7 +12,7 @@ public class LivroDTO {
     private String titulo;
     private String autor;
     private String editora;
-    private Integer ano_publicacao;
+    private Date ano_publicacao;
     private String genero;
     private String isbn;
     private Integer num_paginas;
@@ -44,10 +45,10 @@ public class LivroDTO {
     public void setEditora(String editora) {
         this.editora = editora;
     }
-    public Integer getAno_publicacao() {
+    public Date getAno_publicacao() {
         return ano_publicacao;
     }
-    public void setAno_publicacao(Integer ano_publicacao) {
+    public void setAno_publicacao(Date ano_publicacao) {
         this.ano_publicacao = ano_publicacao;
     }
     public String getGenero() {
@@ -93,8 +94,4 @@ public class LivroDTO {
         this.preco = preco;
     }
 
-    
-  
-
 }
-
