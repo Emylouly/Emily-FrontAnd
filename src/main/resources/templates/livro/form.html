@@ -6,7 +6,7 @@
 
     <link 
       rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      href="/css/bootstrap.min.css"
       integrity="sha384-..." crossorigin="anonymous">
 </head>
 <body>
@@ -90,7 +90,7 @@
             <div class="col-12">
                 <form action="http://localhost:8081/livro/add" method="post">
                     <!-- Campos do formulário -->
-                    <button type="submit">Adicionar Livro</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
                 </form>
                 
                 <a th:href="@{/livro/listall}" class="btn btn-secondary">Voltar</a>
