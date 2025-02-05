@@ -88,13 +88,13 @@
             </div>
 
             <div class="col-12">
-                <form action="http://localhost:8081/livro/add" method="post">
+                <form th:if="!${view}" action="http://localhost:8081/livro/add" method="post">
                     <!-- Campos do formulário -->
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </form>
-                
+            
                 <a th:href="@{/livro/listall}" class="btn btn-secondary">Voltar</a>
-            </div>
+            </div>            
         </form>
     </div>
 
