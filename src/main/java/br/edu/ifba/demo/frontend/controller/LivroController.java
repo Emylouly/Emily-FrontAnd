@@ -62,6 +62,19 @@ public class LivroController {
         return "redirect:/livro/listall";
     }
 
+    @GetMapping("/editar/{id}")
+    public ModelAndView exibirFormularioEditLivro(@PathVariable Long id) {
+        ModelAndView model = new ModelAndView("livro/form");
+
+        LivroDTO livro = livroService.getById(id);
+        if (livro == null) {
+            throw new RuntimeException("Livro não encontrado!");
+        }
+
+        model.addObject("livro", livro);
+        return model;
+    }
+
 
     @PostMapping("/editar")
     public String editarLivro(@ModelAttribute LivroDTO livro, RedirectAttributes redirectAttributes) {
