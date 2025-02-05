@@ -1,0 +1,59 @@
+/* Estilização do formulário */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 8px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.col-md-6, .col-md-4, .col-md-12 {
+    flex: 1 1 calc(50% - 10px);
+}
+
+textarea {
+    resize: none;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(50%);
+}
+
+@media (max-width: 768px) {
+    .col-md-6, .col-md-4 {
+        flex: 1 1 100%;
+    }
+}

@@ -12,16 +12,16 @@
     </div>
 
     <div class="container">
-        <a th:href="@{/livro/novo}" class="adicionar-livro">
+        <a href="/livro/novo" class="btn-cadastrar">
             Adicionar Novo Livro
         </a>
 
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Título</th>
                     <th>Autor</th>
-                    <th>Ano de publicação</th>
+                    <th>Ano de Publicação</th>
                     <th>Número de Páginas</th>
                     <th>Preço</th>
                     <th>Ações</th>
@@ -34,10 +34,16 @@
                     <td th:text="${livro.ano_publicacao}"></td>
                     <td th:text="${livro.num_paginas}"></td>
                     <td th:text="${livro.preco}"></td>
-                    <td>
-                        <button class="visualizar" th:onclick="|window.location='@{/livro/view/{id}(id=${livro.id_livro})}'|">Visualizar</button>
-                        <button class="editar" th:onclick="|window.location='@{/livro/edit/{id}(id=${livro.id_livro})}'|">Editar</button>
-                        <button class="excluir" th:onclick="|if(confirm('Tem certeza que deseja deletar?')) window.location='@{/livro/deletelivro/{id}(id=${livro.id_livro})}'|">Excluir</button>
+                    <td class="acoes-btn">
+                        <button class="btn-visualizar" th:onclick="|window.location='@{/livro/view/{id}(id=${livro.id_livro})}'|">
+                            Visualizar
+                        </button>
+                        <button class="btn-editar" th:onclick="|window.location='@{/livro/edit/{id}(id=${livro.id_livro})}'|">
+                            Editar
+                        </button>
+                        <button class="btn-deletar" th:onclick="|if(confirm('Tem certeza que deseja deletar?')) window.location='@{/livro/deletelivro/{id}(id=${livro.id_livro})}'|">
+                            Excluir
+                        </button>
                     </td>
                 </tr>
             </tbody>
