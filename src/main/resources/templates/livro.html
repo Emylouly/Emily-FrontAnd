@@ -5,73 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Livros</title>
     <link rel="stylesheet" href="/css/stylesLivro.css">
-  
 </head>
 <body>
     <div class="header">
         <h1>Lista de Livros</h1>
     </div>
 
-    <!-- Mensagem de erro -->
-    <div th:if="${errorMessage}" class="error-message">
-        <p th:text="${errorMessage}"></p>
-    </div>
-
-    <!-- Mensagem de sucesso -->
-    <div th:if="${deletelivro}" class="alert alert-success" role="alert">
-        <p th:text="${deletelivro}"></p>
-    </div>
-
     <div class="container">
-        <a th:href="@{/livro/novo}" class="btn btn-primary mb-3">
-            Cadastrar Novo
+        <a th:href="@{/livro/novo}" class="adicionar-livro">
+            Adicionar Novo Livro
         </a>
-    <!-- Tabela de livros -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Ano de publicação</th>
-                <th>Número de Páginas</th>
-                <th>Preço</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="livro : ${listaLivro}">
-                <td th:text="${livro.titulo}"></td>
-                <td th:text="${livro.autor}"></td>
-                <td th:text="${livro.ano_publicacao}"></td>
-                <td th:text="${livro.num_paginas}"></td>
-                <td th:text="${livro.preco}"></td>
-                <td>
 
-                    <input type="hidden" name="id" th:value="${livro.id_livro}"/>
-                    <a class="btn btn-primary btn-sm" 
-                        th:href="@{/livro/view/{id}(id=${livro.id_livro})}">
-                        <button>Visualizar</button>
-                    </a>
-
-                    <a class="btn btn-primary btn-sm"
-                        th:href="@{/livro/edit/{id}(id=${livro.id_livro})}">
-                        <button>Editar</button>
-                    </a>
-
-                    <a class="btn btn-primary btn-sm"
-                        th:href="@{/livro/deletelivro/{id}(id=${livro.id_livro})}"
-                       onclick="return confirm('Tem certeza que deseja deletar?');">
-                        <button>Deletar</button>
-                    </a>
-
-                        <input type="hidden" name="_method" id="_method" value="" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Ano de publicação</th>
+                    <th>Número de Páginas</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="livro : ${listaLivro}">
+                    <td th:text="${livro.titulo}"></td>
+                    <td th:text="${livro.autor}"></td>
+                    <td th:text="${livro.ano_publicacao}"></td>
+                    <td th:text="${livro.num_paginas}"></td>
+                    <td th:text="${livro.preco}"></td>
+                    <td>
+                        <button class="visualizar" th:onclick="|window.location='@{/livro/view/{id}(id=${livro.id_livro})}'|">Visualizar</button>
+                        <button class="editar" th:onclick="|window.location='@{/livro/edit/{id}(id=${livro.id_livro})}'|">Editar</button>
+                        <button class="excluir" th:onclick="|if(confirm('Tem certeza que deseja deletar?')) window.location='@{/livro/deletelivro/{id}(id=${livro.id_livro})}'|">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
 </body>
 </html>
