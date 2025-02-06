@@ -46,8 +46,10 @@
 
             <div class="col-md-4">
                 <label for="genero" class="form-label">Gênero:</label>
-                <input type="text" class="form-control" th:disabled="${view}"
-                       id="genero" th:field="*{genero}" />
+                <select class="form-control me-2" id="genero" th:field="*{genero}">
+                    <option value="">Selecione um gênero</option>
+                    <option th:each="g : ${generos}" th:value="${g.id_genero}" th:text="${g.nome}"></option>
+                </select>                
             </div>
 
             <div class="col-md-4">
