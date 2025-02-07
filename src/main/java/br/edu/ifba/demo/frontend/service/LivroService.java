@@ -12,7 +12,6 @@ import br.edu.ifba.demo.frontend.dto.LivroDTO;
 import reactor.core.publisher.Mono;
 
 @Service
-
 public class LivroService {
 
     private final String BASE_URL = "http://localhost:8081/livro";
@@ -45,18 +44,15 @@ public class LivroService {
     }
 
     public boolean salvarOuAtualizar(LivroDTO livroDTO) {
-        try {
-            LivroDTO resultado = this.webClient.post().uri("/salvar")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .bodyValue(livroDTO)
-                    .retrieve()
-                    .bodyToMono(LivroDTO.class)
-                    .block();
-            return resultado != null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        LivroDTO salvar = this.webClient.post()
+            .uri("/salvar")
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(livroDTO)
+            .retrieve()
+            .bodyToMono(LivroDTO.class)
+            .block();
+
+        return salvar !=null;
     }
     
 }

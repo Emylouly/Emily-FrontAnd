@@ -69,17 +69,13 @@ public class LivroController {
 
     @PostMapping("/salvar")
     public String salvarLivro(@ModelAttribute("livro") LivroDTO livroDTO, RedirectAttributes redirectAttributes) {
-        try {
-            boolean sucesso = livroService.salvarOuAtualizar(livroDTO);
-            if (sucesso) {
-                redirectAttributes.addFlashAttribute("mensagem", "Livro salvo com sucesso!");
-            } else {
-                redirectAttributes.addFlashAttribute("erro", "Falha ao salvar o livro. Verifique os dados.");
-            }
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erro", "Erro inesperado ao salvar o livro: " + e.getMessage());
+        boolean sucesso = livroService.salvarOuAtualizar(livroDTO);
+        if (sucesso) {
+            redirectAttributes.addFlashAttribute("mensagem", "Gênero salvo com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("erro", "Erro ao salvar gênero!");
         }
-        return "redirect:/livro/listall";
+        return "redirect:/livro/novo";  // Confirme se esta URL está correta
     }
 
 }
