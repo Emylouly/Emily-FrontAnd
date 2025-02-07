@@ -27,7 +27,7 @@ public class GeneroService {
 
     public void addGenero(GeneroDTO generoDTO) {
         this.webClient.post()
-                .uri("/add") // Correto para gêneros
+                .uri("/salvar") // Correto para gêneros
                 .bodyValue(generoDTO)
                 .retrieve()
                 .bodyToMono(Void.class)
@@ -39,11 +39,13 @@ public class GeneroService {
         GeneroDTO salvar = this.webClient.post()
                 .uri("/salvar")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(generoDTO).retrieve()
+                .bodyValue(generoDTO)
+                .retrieve()
                 .bodyToMono(GeneroDTO.class)
                 .block();
         return salvar != null;
     }
+    
 
     public void deletarGenero(Long id) {
         this.webClient.delete()

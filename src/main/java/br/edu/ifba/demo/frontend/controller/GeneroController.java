@@ -27,8 +27,9 @@ public class GeneroController {
         } else {
             redirectAttributes.addFlashAttribute("erro", "Erro ao salvar gênero!");
         }
-        return "redirect:/livro/novo";  // Redireciona para o formulário de novo livro, onde o novo gênero será listado
+        return "redirect:/livro/novo";  // Confirme se esta URL está correta
     }
+
 
     @GetMapping("/deletar/{id}")
     public String deletarGenero(@PathVariable Long id, RedirectAttributes redirectAttributes) {

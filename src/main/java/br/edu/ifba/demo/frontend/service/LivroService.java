@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import br.edu.ifba.demo.frontend.dto.LivroDTO;
 import reactor.core.publisher.Mono;
@@ -45,17 +44,19 @@ public class LivroService {
         
     }
 
-        public boolean salvarOuAtualizar(LivroDTO livroDTO) {
-            try {
-                LivroDTO resultado = this.webClient.post().uri("/salvar").contentType(MediaType.APPLICATION_JSON)
-                        .bodyValue(livroDTO).retrieve().bodyToMono(LivroDTO.class).block();
-                return resultado != null;
-            } catch (WebClientResponseException e) {
-                System.err.println("Erro na requisição: " + e.getMessage());
-                return false;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
+    public boolean salvarOuAtualizar(LivroDTO livroDTO) {
+        try {
+            LivroDTO resultado = this.webClient.post().uri("/salvar")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(livroDTO)
+                    .retrieve()
+                    .bodyToMono(LivroDTO.class)
+                    .block();
+            return resultado != null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
+    }
+    
 }
