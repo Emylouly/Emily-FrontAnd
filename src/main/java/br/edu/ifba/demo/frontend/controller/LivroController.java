@@ -49,10 +49,11 @@ public class LivroController {
     @GetMapping("/novo")
     public ModelAndView exibirFormularioNovoLivro() {
         ModelAndView model = new ModelAndView("livro/form");
-        model.addObject("livro", new LivroDTO()); // Objeto novo para o formulário
+        model.addObject("livro", new LivroDTO());
         model.addObject("generos", generoService.listAllGeneros()); // Passa a lista de gêneros
         return model;
     }
+
 
     @GetMapping("/editar/{id}")
     public ModelAndView exibirFormularioEditLivro(@PathVariable Long id) {

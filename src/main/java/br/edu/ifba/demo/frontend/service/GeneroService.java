@@ -44,4 +44,13 @@ public class GeneroService {
                 .block();
         return salvar != null;
     }
+
+    public void deletarGenero(Long id) {
+        this.webClient.delete()
+                .uri("/deletar/{id}", id)
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+    }
+    
 }
