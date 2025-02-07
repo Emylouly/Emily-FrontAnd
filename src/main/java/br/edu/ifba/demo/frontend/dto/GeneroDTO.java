@@ -1,5 +1,12 @@
 package br.edu.ifba.demo.frontend.dto;
 
-public class GeneroDTO {
-    
+import java.io.Serializable;
+
+import lombok.Data;
+
+@Data
+public class GeneroDTO implements Serializable {
+    private Long id_genero;
+    private String nome;
+    private Boolean status;
 }
